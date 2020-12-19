@@ -11,8 +11,13 @@ def call(){
                 steps {
                     script{
                         println 'Herramienta de ejecución seleccionada: ' + params.buildtool
-                        def pipe = load "${params.buildtool}.groovy"
-                        pipe.call()
+
+                        if (params.buildtool == 'gradle'){
+                            gradle.call()  
+                        } else {
+                            maven.call()  
+                        }
+
                     }
                 }
             }
