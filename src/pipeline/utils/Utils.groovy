@@ -1,4 +1,4 @@
-package utils
+package pipeline.utils
 
 def getValidatedStages(String chosenStages, String pipelineStages){
 
