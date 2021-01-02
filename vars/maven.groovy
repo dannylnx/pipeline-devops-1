@@ -14,10 +14,7 @@ def call(String chosenStages){
         'nexus'
     ]
 
-    def ut  = new test.UtilMethods()
-
-    ut.hola()
-
+    def utils  = new test.UtilMethods()
     def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 
     stages.each{

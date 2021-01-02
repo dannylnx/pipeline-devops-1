@@ -13,11 +13,12 @@ def call(String chosenStages){
 		'nexus'
 	]
 
-	def ut  = new test.UtilMethods()
+	def utils  = new test.UtilMethods()
 
-	ut.hola() 
+    println chosenStages.getClass()
+    println pipelineStages.getClass()
 
-	ut.valStages(chosenStages, pipelineStages)
+	def stages = utils.valStages(chosenStages, pipelineStages)
 
 	stages.each{
 		stage(it){
