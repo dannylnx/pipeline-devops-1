@@ -1,3 +1,5 @@
+import pipeline.*
+
 def call(String chosenStages){
 
 	figlet 'gradle'
@@ -11,10 +13,10 @@ def call(String chosenStages){
 		'nexus'
 	]
 
-	def ut  = new pipeline.test.UtilMethods()
+	def ut  = new test.UtilMethods()
 
 	println ut 
-	
+
 	def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 
 	stages.each{
