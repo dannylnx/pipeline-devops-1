@@ -1,23 +1,27 @@
 package pipeline.utils
 
-def getValidatedStages(String chosenStages, String pipelineStages){
 
-	def stages = []
+class Utils implements Serializable {
 
-	if (chosenStages?.trim()){
-		chosenStages.split(';').each{
-			if (it in pipelineStages){
-				stages.add(it)
-			} else {
-				error "${it} no existe como Stage. Stages disponibles: ${pipelineStages}"
+	def getValidatedStages(String chosenStages, String pipelineStages){
+
+		def stages = []
+
+		if (chosenStages?.trim()){
+			chosenStages.split(';').each{
+				if (it in pipelineStages){
+					stages.add(it)
+				} else {
+					error "${it} no existe como Stage. Stages disponibles: ${pipelineStages}"
+				}
 			}
+		} else {
+			println "Parámetro de stages vacío. Se ejecutarán todos los stages en el siguiente orden: ${pipelineStages}"
+			stages = pipelineStages
 		}
-	} else {
-		println "Parámetro de stages vacío. Se ejecutarán todos los stages en el siguiente orden: ${pipelineStages}"
-		stages = pipelineStages
+
+		return stages
 	}
 
-	return stages
 }
-
 return this;
