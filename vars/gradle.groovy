@@ -12,6 +12,9 @@ def call(String chosenStages){
 	]
 
 	def ut  = new pipeline.test.UtilMethods()
+
+	println ut 
+	
 	def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 
 	stages.each{
