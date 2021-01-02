@@ -7,7 +7,7 @@ def call(String chosenStages){
 
 		'buildAndTest',
 		'sonar',
-		'run',
+		'jar',
 		'rest',
 		'nexus'
 	]
@@ -36,7 +36,7 @@ def sonar(){
     sh "${sonarhome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
 }
 
-def run(){
+def jar(){
 	sh "nohup bash gradlew bootRun &"
 	sleep 20
 }
