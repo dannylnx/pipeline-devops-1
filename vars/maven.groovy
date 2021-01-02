@@ -1,27 +1,52 @@
-def call(){
-    
-    stage('Compile Code') {
-        sh './mvnw clean compile -e'   
-    }
+import utils.*
 
-    stage('Test Code') {
-        sh './mvnw clean test -e'   
-    }
 
-    stage('Jar Code') {
-        sh './mvnw clean package -e'
-    }
+def call(String chosenStages){
 
-    stage('SonarQube') {
-        withSonarQubeEnv(installationName: 'sonar') {
-            sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    def pipelineStages = [
+
+        'compile',
+        'test',
+        'jar',
+        'sonar',
+        'nexus'
+    ]
+
+    def utils  = new Utils()
+    def stages = utils.getValidatedStages(chosenStages, pipelineStages)
+
+    stages.each{
+        stage(it){
+            try {
+                "${it}"()
+            }
+            catch(Exception e) {
+                error "Stage ${it} tiene problemas: ${e}"
+            }
         }
     }
+}
 
-    stage('Upload Nexus') {
-        nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]] 
+def compile(){
+    sh './mvnw clean compile -e'
+}
+
+def test(){
+    sh './mvnw clean test -e'
+}
+
+def jar(){
+    sh './mvnw clean package -e'
+}
+
+def sonar(){
+    withSonarQubeEnv(installationName: 'sonar') {
+        sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
     }
+}
 
+def nexus(){
+    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '0.0.1']]]  
 }
 
 return this;
