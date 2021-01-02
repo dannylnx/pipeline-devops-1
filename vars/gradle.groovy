@@ -15,7 +15,7 @@ def call(String chosenStages){
 
 	def ut  = new test.UtilMethods()
 
-	println ut 
+	ut.hola() 
 
 	def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 

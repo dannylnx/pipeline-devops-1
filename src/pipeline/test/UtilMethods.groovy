@@ -19,5 +19,9 @@ def getValidatedStages(String chosenStages, String pipelineStages){
 
 	return stages
 }
-	
+
+def hola(){
+	println 'hola'
+}
+
 return this;
