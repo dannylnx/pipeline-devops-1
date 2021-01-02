@@ -9,7 +9,7 @@ def call(){
                         figlet params.buildtool
                         stages.split(',').each{
                             try{
-                                "${params.buildtool}"."${it}"()
+                                "${params.buildtool.it}"()
                             }catch (Exception e){
                                 error "Error en stage ${it}: ${e}"
                             }
