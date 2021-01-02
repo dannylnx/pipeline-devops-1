@@ -9,12 +9,13 @@ def getValidatedStages(String chosenStages, ArrayList pipelineStages){
 			if (it in pipelineStages){
 				stages.add(it)
 			} else {
-				error "${it} no existe como Stage. Stages disponibles: ${pipelineStages}"
+				error "${it} no existe como Stage. Stages disponibles para ejecutar: ${pipelineStages}"
 			}
 		}
+		println "Validación de stages correcta. Se ejecutarán los siguientes stages en orden: ${stages}"
 	} else {
-		println "Parámetro de stages vacío. Se ejecutarán todos los stages en el siguiente orden: ${pipelineStages}"
 		stages = pipelineStages
+		println "Parámetro de stages vacío. Se ejecutarán todos los stages en el siguiente orden: ${stages}"
 	}
 
 	return stages
