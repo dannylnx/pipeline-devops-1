@@ -38,7 +38,7 @@ def runJar(){
 }
 
 def sonar(){
-    withSonarQubeEnv(installationName: 'sonar') {
+    withSonarQubeEnv(installationName: 'sonar-server') {
         sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
     }
 }

@@ -26,7 +26,7 @@ def buildAndTest(){
 }
 
 def sonar(){
-	def sonarhome = tool 'sonar'
+	def sonarhome = tool 'sonar-scanner'
     sh "${sonarhome}/bin/sonar-scanner -Dsonar.projectKey=ejemplo-gradle -Dsonar.java.binaries=build"
 }
 
