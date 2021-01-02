@@ -17,7 +17,7 @@ def call(String chosenStages){
 
 	ut.hola() 
 
-	ut.getValidatedStages(chosenStages, pipelineStages)
+	ut.valStages(chosenStages, pipelineStages)
 
 	stages.each{
 		stage(it){

@@ -1,6 +1,6 @@
 package pipeline.test
 
-def getValidatedStages(String chosenStages, String pipelineStages){
+def valStages(String chosenStages, String pipelineStages){
 
 	def stages = []
 
