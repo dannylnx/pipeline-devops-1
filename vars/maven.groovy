@@ -13,7 +13,7 @@ def call(String chosenStages){
         'nexus'
     ]
 
-    def utils  = new Utils()
+    def utils  = new utils.Utils()
     def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
     stages.each{
