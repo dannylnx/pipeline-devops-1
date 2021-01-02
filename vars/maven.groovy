@@ -8,6 +8,7 @@ def call(String chosenStages){
         'compile',
         'test',
         'jar',
+        'runJar',
         'sonar',
         'nexus'
     ]
@@ -37,6 +38,10 @@ def test(){
 
 def jar(){
     sh './mvnw clean package -e'
+}
+
+def runJar(){
+    sh 'nohup bash mvnw spring-boot:run &'
 }
 
 def sonar(){
