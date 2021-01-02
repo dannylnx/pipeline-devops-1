@@ -1,7 +1,6 @@
-import pipeline.utils.*
-
-
 def call(String chosenStages){
+
+	figlet 'gradle'
 
 	def pipelineStages = [
 
@@ -12,8 +11,8 @@ def call(String chosenStages){
 		'nexus'
 	]
 
-	def utils  = new Utils()
-	def stages = utils.getValidatedStages(chosenStages, pipelineStages)
+	def ut  = new pipeline.utils.Utils()
+	def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 
 	stages.each{
 		stage(it){

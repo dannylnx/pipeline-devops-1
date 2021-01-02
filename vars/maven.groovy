@@ -1,7 +1,6 @@
-import pipeline.utils
-
-
 def call(String chosenStages){
+
+    figlet 'maven'
 
     def pipelineStages = [
 
@@ -13,8 +12,8 @@ def call(String chosenStages){
         'nexus'
     ]
 
-    def utilitarios  = new utils.Utils()
-    def stages = utilitarios.getValidatedStages(chosenStages, pipelineStages)
+    def ut  = new pipeline.utils.Utils()
+    def stages = ut.getValidatedStages(chosenStages, pipelineStages)
 
     stages.each{
         stage(it){
