@@ -1,7 +1,7 @@
-package pipeline.utils
+package pipeline.test
 
 
-class Utils implements Serializable {
+class UtilMethods implements Serializable {
 
 	def getValidatedStages(String chosenStages, String pipelineStages){
 
