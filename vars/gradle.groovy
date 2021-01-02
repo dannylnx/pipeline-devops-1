@@ -1,4 +1,4 @@
-import utils.*
+import pipeline.utils.*
 
 
 def call(String chosenStages){
@@ -12,7 +12,7 @@ def call(String chosenStages){
 		'nexus'
 	]
 
-	def utils  = new utils.Utils()
+	def utils  = new Utils()
 	def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
 	stages.each{
