@@ -4,21 +4,10 @@ def call(String chosenStages){
 
 	figlet 'gradle'
 
-	def pipelineStages = [
-
-		'buildAndTest',
-		'sonar',
-		'runJar',
-		'rest',
-		'nexus'
-	]
+	def pipelineStages = ['buildAndTest','sonar','runJar','rest','nexus']
 
 	def utils  = new test.UtilMethods()
-
-    println chosenStages.getClass()
-    println pipelineStages.getClass()
-
-	def stages = utils.valStages(chosenStages, pipelineStages)
+	def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
 	stages.each{
 		stage(it){

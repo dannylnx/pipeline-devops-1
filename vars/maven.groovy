@@ -4,18 +4,10 @@ def call(String chosenStages){
 
     figlet 'maven'
 
-    def pipelineStages = [
-
-        'compile',
-        'test',
-        'jar',
-        'runJar',
-        'sonar',
-        'nexus'
-    ]
+    def pipelineStages = ['compile','test','jar','runJar','sonar','nexus']
 
     def utils  = new test.UtilMethods()
-    def stages = ut.getValidatedStages(chosenStages, pipelineStages)
+    def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
     stages.each{
         stage(it){
