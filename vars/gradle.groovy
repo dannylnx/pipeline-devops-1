@@ -48,6 +48,7 @@ def downloadNexus(){
 
 def runDownloadedJar(){
     sh "nohup bash java -jar DevOpsUsach2020-0.0.1-develop.jar"
+    sleep 20
 }
 
 def nexusCD(){
