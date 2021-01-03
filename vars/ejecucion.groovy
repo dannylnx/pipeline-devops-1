@@ -5,7 +5,7 @@ def call(){
             choice(name: 'buildtool', choices: ['gradle','maven'], description: 'Elección de herramienta')
         }
         options {
-            parameters([
+            parameters {
                 [$class: 'CascadeChoiceParameter', 
                     choiceType: 'RADIO', 
                     description: 'Stages', 
@@ -33,7 +33,7 @@ def call(){
                         ]
                     ]
                 ]
-            ])
+            }
         }
         stages {
             stage('Pipeline') {
