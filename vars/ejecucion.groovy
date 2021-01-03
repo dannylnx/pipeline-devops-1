@@ -4,7 +4,7 @@ def call(){
         parameters { 
             choice(name: 'buildtool', choices: ['gradle','maven'], description: 'Elección de herramienta')
         }
-        properties([
+        options([
             parameters([
                 [$class: 'CascadeChoiceParameter', 
                     choiceType: 'RADIO', 
