@@ -4,7 +4,7 @@ def call(String chosenStages){
 
     def utils  = new test.UtilMethods()
 
-    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','nexusCI'] : ['downloadNexus','runJar','rest','nexusCD'] 
+    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
 
     def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
@@ -51,11 +51,15 @@ def nexusCI(){
 }
 
 def downloadNexus(){
-    sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar -O"
+    sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1-develop/DevOpsUsach2020-0.0.1-develop.jar -O"
+}
+
+def runDownloadedJar(){
+    sh "nohup bash java -jar DevOpsUsach2020-0.0.1-develop.jar"
 }
 
 def nexusCD(){
-    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]  
+    nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "DevOpsUsach2020-0.0.1-develop.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: '1.0.0']]]  
 }
 
 return this;
