@@ -21,8 +21,4 @@ def getValidatedStages(String chosenStages, ArrayList pipelineStages){
 	return stages
 }
 
-def hola(){
-	println 'hola'
-}
-
 return this;
