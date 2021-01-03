@@ -3,17 +3,38 @@ def call(){
         agent any
         parameters { 
             choice(name: 'buildtool', choices: ['gradle','maven'], description: 'Elección de herramienta')
-            activeChoiceReactiveParam(
-                  name: 'stages',
-                  description: 'seleccionar stages',
-                  referencedParameter: 'buildtool',
-                  choiceType: 'RADIO',
-                  groovyScript: {
-                    script: 'if (buildtool == "gradle"){ return ["compile","test","jar","runJar","sonar","nexus"] } else { return ["buildAndTest","sonar","runJar","rest","nexus"] }',
-                    sandbox: true
-                  }  
-            )
         }
+        properties([
+            parameters([
+                [$class: 'CascadeChoiceParameter', 
+                    choiceType: 'RADIO', 
+                    description: 'Stages', 
+                    filterLength: 1, 
+                    filterable: false, 
+                    name: 'stages', 
+                    randomName: 'choice-parameter-5631314456178619', 
+                    referencedParameters: 'buildtool', 
+                    script: [
+                        $class: 'GroovyScript', 
+                        script: [
+                            classpath: [], 
+                            sandbox: true, 
+                            script: 
+                                ''' 
+                                    def maven = ['compile','test','jar','runJar','sonar','nexus']
+                                    def gradle = ['buildAndTest','sonar','runJar','rest','nexus']
+
+                                    if (buildtool == 'gradle'){
+                                        return gradle
+                                    } else {
+                                        return maven
+                                    }
+                                '''
+                        ]
+                    ]
+                ]
+            ])
+        ])
         stages {
             stage('Pipeline') {
                 steps {
