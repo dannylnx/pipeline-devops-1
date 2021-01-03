@@ -6,7 +6,7 @@ def call(){
             activeChoiceReactiveParam(
                   name: 'stages',
                   description: 'seleccionar stages',
-                  referencedParameter: 'buildtool'
+                  referencedParameter: 'buildtool',
                   choiceType: 'RADIO',
                   groovyScript: {
                     script: '''
@@ -18,7 +18,7 @@ def call(){
                         } else {
                             return maven
                         }
-                    '''
+                    ''',
                     sandbox: true
                   }  
             )
