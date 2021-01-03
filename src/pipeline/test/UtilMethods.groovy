@@ -21,4 +21,14 @@ def getValidatedStages(String chosenStages, ArrayList pipelineStages){
 	return stages
 }
 
+def isCIorCD(){
+	if (env.GIT_BRANCH.contains('develop') || env.GIT_BRANCH.contains('feature')){
+		figlet 'Integracion Continua'
+		return 'ci'
+	} else {
+		figlet 'Entrega Continua'
+		return 'cd'
+	}
+}
+
 return this;

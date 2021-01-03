@@ -12,9 +12,7 @@ def call(){
             stage('Pipeline') {
                 steps {
                     script{
-                        
-                        sh 'env'
-                        
+
                         figlet params.buildtool
 
                         if (params.buildtool == 'gradle'){
