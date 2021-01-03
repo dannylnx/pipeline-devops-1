@@ -12,7 +12,10 @@ def call(){
             stage('Pipeline') {
                 steps {
                     script{
-                        println 'Herramienta de ejecución seleccionada: ' + params.buildtool
+                        
+                        sh 'env'
+                        
+                        figlet params.buildtool
 
                         if (params.buildtool == 'gradle'){
                             gradle "${params.stages}" 
