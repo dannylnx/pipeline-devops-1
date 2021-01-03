@@ -9,7 +9,7 @@ def call(){
                   referencedParameter: 'buildtool',
                   choiceType: 'RADIO',
                   groovyScript: {
-                    script: "if (buildtool == 'gradle'){ return ['compile','test','jar','runJar','sonar','nexus'] } else { return ['buildAndTest','sonar','runJar','rest','nexus'] }",
+                    script: 'if (buildtool == "gradle"){ return ["compile","test","jar","runJar","sonar","nexus"] } else { return ["buildAndTest","sonar","runJar","rest","nexus"] }',
                     sandbox: true
                   }  
             )
@@ -34,4 +34,3 @@ def call(){
 }
 
 return this;
-
