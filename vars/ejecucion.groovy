@@ -13,6 +13,8 @@ def call(){
                 steps {
                     script{
 
+                        sh 'env'
+
                         figlet params.buildtool
                         def archivo = (params.buildtool == 'gradle') ? 'build.gradle' : 'pom.xml'
 
@@ -27,7 +29,7 @@ def call(){
             }
         }
     }
-
+$
 }
 
 return this;
