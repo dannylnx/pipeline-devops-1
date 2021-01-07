@@ -40,6 +40,7 @@ def sonar(){
 
 def runJar(){
     sh 'nohup bash mvnw spring-boot:run &'
+    sleep 20
 }
 
 def rest(){
