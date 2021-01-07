@@ -9,7 +9,7 @@ def checkIfBranchExists(String branch){
 }
 
 def isBranchUpdated(String ramaOrigen, String ramaDestino){
-	def output = sh (script: "git pull; git log origin/${ramaDestino}..origin/${ramaOrigen}", returnStdout: true)
+	def output = sh (script: "git pull; git fetch -p; git log origin/${ramaDestino}..origin/${ramaOrigen}", returnStdout: true)
 	def respuesta = (!output?.trim()) ? true : false
 
 	return respuesta
