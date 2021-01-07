@@ -9,9 +9,13 @@ def checkIfBranchExists(String branch){
 }
 
 def isBranchUpdated(String ramaOrigen, String ramaDestino){
-	sh "git config --add remote.origin.fetch +refs/heads/${ramaOrigen}:refs/remotes/origin/${ramaOrigen}; git fetch -p"
 
-	def output = sh (script: "git log origin/${ramaDestino}..origin/${ramaOrigen}", returnStdout: true)
+	
+	sh "git checkout ${ramaOrigen}; git pull"
+	sh "git checkout ${ramaDestino}; git pull"
+
+
+	def output = sh (script: "git log ${ramaDestino}..${ramaOrigen}", returnStdout: true)
 	def respuesta = (!output?.trim()) ? true : false
 
 	return respuesta
@@ -32,3 +36,5 @@ def createBranch(String branch, String ramaOrigen){
 }
 
 return this;
+
+
