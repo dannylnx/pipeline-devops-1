@@ -51,21 +51,6 @@ def nexusCI(){
     nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'test-nexus', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "build/DevOpsUsach2020-0.0.1.jar"]], mavenCoordinate: [artifactId: 'DevOpsUsach2020', groupId: 'com.devopsusach2020', packaging: 'jar', version: "0.0.1-${env.GIT_BRANCH}"]]]  
 }
 
-def createRelease(){
-    def git = new pipeline.git.GitMethods()
-
-    if (git.checkIfBranchExists('release-v1-0-0')){
-        if (git.isBranchUpdated(env.GIT_BRANCH, 'release-v1-0-0')){
-            println 'La rama ya está creada y actualizada contra ' + env.GIT_BRANCH
-        } else {
-            git.deleteBranch('release-v1-0-0')
-            git.createBranch('release-v1-0-0', env.GIT_BRANCH)
-        }
-    } else {
-        git.createBranch('release-v1-0-0', env.GIT_BRANCH)
-    }
-}
-
 def downloadNexus(){
     sh "curl -X GET -u admin:admin http://localhost:8081/repository/test-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1-develop/DevOpsUsach2020-0.0.1-develop.jar -O"
 }
