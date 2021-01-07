@@ -3,7 +3,7 @@ package pipeline.git
 
 def checkIfBranchExists(String branch){
 	def output = sh (script: "git ls-remote --heads origin ${branch}", returnStdout: true)
-	def respuesta = (!output?.trim()) ? true : false
+	def respuesta = (!output?.trim()) ? false : true
 
 	return respuesta
 }
