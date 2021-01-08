@@ -16,9 +16,9 @@ def deleteBranch(String branch){
 def createBranch(String origin, String newBranch){
 	sh '''
 		git pull 
-		git checkout ${origin}
-		git checkout -b ${newBranch}
-		git push origin ${newBranch}
+		git checkout '''+origin+'''
+		git checkout -b '''+newBranch+'''
+		git push origin '''+newBranch+'''
 	'''
 }
 
