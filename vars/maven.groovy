@@ -4,7 +4,7 @@ def call(String chosenStages){
 
     def utils  = new test.UtilMethods()
 
-    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
+    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI','crearRelease'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
 
     def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
@@ -17,6 +17,14 @@ def call(String chosenStages){
                 error "Stage ${it} tiene problemas: ${e}"
             }
         }
+    }
+}
+
+def crearRelease(){
+    if (env.GIT_BRANCH.contains('develop')){
+        println 'Crear Release'
+    } else {
+        println "La rama ${env.GIT_BRANCH} no corresponde como rama de orígen para la creación de un Release."
     }
 }
 
