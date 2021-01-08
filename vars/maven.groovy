@@ -4,7 +4,7 @@ def call(String chosenStages){
 
     def utils  = new test.UtilMethods()
 
-    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI','createRelease'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
+    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
 
     def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
