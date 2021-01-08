@@ -15,10 +15,12 @@ def deleteBranch(String branch){
 
 def createBranch(String origin, String newBranch){
 	sh '''
-		git pull 
-		git checkout '''+origin+'''
+		git fetch -p 
+		git checkout '''+origin+'''; git pull
 		git checkout -b '''+newBranch+'''
 		git push origin '''+newBranch+'''
+		git checkout '''+origin+'''; git pull
+		git branch -d '''+newBranch+'''
 	'''
 }
 
