@@ -9,7 +9,7 @@ def call(){
         }
 
         stages {
-            stage('Pipeline') {
+            stage('pipeline') {
                 steps {
                     script{
 
