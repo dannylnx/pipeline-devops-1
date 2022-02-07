@@ -4,8 +4,8 @@ def call(String chosenStages){
 
     def utils  = new test.UtilMethods()
 
-    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI','crearRelease'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
-    //def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
+    //def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI','crearRelease'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
+    def pipelineStages = (utils.isCIorCD().contains('ci')) ? ['compile','test','jar','sonar','runJar','rest','nexusCI'] : ['downloadNexus','runDownloadedJar','rest','nexusCD'] 
 
     def stages = utils.getValidatedStages(chosenStages, pipelineStages)
 
@@ -41,26 +41,26 @@ def crearRelease(){
         println "La rama ${env.GIT_BRANCH} no corresponde como rama de orígen para la creación de un Release."
     }
 }
-def crearMerge(){
-    if (env.GIT_BRANCH.contains('release')){
+//def crearMerge(){
+//    if (env.GIT_BRANCH.contains('release')){
+//
+//        def git = new git.GitMethods()
 
-        def git = new git.GitMethods()
-
-        if (git.checkIfBranchExists('release-v1-0-0')){
-            println 'La rama existe'
-            git.deleteBranch('release-v1-0-0')
-            println 'Rama eliminada. Se crea nuevamente.'
-            //git.createBranch(env.GIT_BRANCH,'release-v1-0-0')
-            //println 'Rama creada con éxito.'
-        } else {
-            git.createBranch(env.GIT_BRANCH,'release-v1-0-0')
-            println 'Rama creada con éxito.'
-        }
-
-    } else {
-        println "La rama ${env.GIT_BRANCH} no corresponde como rama de orígen para la creación de un Release."
-    }
-}
+//        if (git.checkIfBranchExists('release-v1-0-0')){
+//            println 'La rama existe'
+//            git.deleteBranch('release-v1-0-0')
+//            println 'Rama eliminada. Se crea nuevamente.'
+//            //git.createBranch(env.GIT_BRANCH,'release-v1-0-0')
+//            //println 'Rama creada con éxito.'
+//        } else {
+//            git.createBranch(env.GIT_BRANCH,'release-v1-0-0')
+//            println 'Rama creada con éxito.'
+//        }
+//
+//    } else {
+//        println "La rama ${env.GIT_BRANCH} no corresponde como rama de orígen para la creación de un Release."
+//    }
+//}
 
 def compile(){
     sh './mvnw clean compile -e'

@@ -29,6 +29,7 @@ def createBranch(String origin, String newBranch){
 }
 def createMerge(String origin, String mBranch){
 	withCredentials([gitUsernamePassword(credentialsId: 'jenkins-github-token',gitToolName: 'git-tool')]) {
+		////incompleto
 	sh '''
 		git fetch -p
 		git checkout '''+origin+'''; git pull
