@@ -28,6 +28,14 @@ def call(){
                 }
             }
         }
+        post{
+            success{
+                slackSend color: 'good', message: "[Daniel Gavilán] [${JOB_NAME}] [${BUILD_TAG}] Ejecucion Exitosa", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'token-slack'
+            }
+            failure{
+                slackSend color: 'danger', message: "[Daniel Gavilán] [${env.JOB_NAME}] [${BUILD_TAG}] Ejecucion fallida en stage [${env.TAREA}]", teamDomain: 'dipdevopsusac-tr94431', tokenCredentialId: 'token-slack'
+            }
+        }
     }
 }
 
